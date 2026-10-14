@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 // Union-Find (union by size + path compression)
 struct UnionFind {
     vector<int> parents;

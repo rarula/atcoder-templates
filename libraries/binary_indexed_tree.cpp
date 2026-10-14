@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 template<class T> struct BIT {
 private:
     int n;

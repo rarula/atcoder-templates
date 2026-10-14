@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 // 整数の両閉区間 [l, r] において重なる・隣接する区間をマージした列を返す
 vector<pair<ll,ll>> merge_intervals(vector<pair<ll,ll>> vec) {
     ll len = vec.size();

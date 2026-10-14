@@ -4,6 +4,7 @@ using ll = long long;
 
 #include "eratosthenes_sieve.cpp"
 
+// from https://github.com/rarula/atcoder-templates
 vector<ll> enumerate_primes(ll n) {
     vector<bool> is_prime = eratosthenes(n);
     ll len = is_prime.size();

@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 vector<bool> eratosthenes(ll n) {
     vector<bool> is_prime(n+1, true);
     is_prime[0] = false;

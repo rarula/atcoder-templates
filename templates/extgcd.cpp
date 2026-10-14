@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 ll extgcd(ll a, ll b, ll &x, ll &y) {
     if (b == 0) {
         x = 1;

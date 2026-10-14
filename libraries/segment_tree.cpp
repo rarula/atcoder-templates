@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 template<class S, S (*op)(S, S), S (*e)()>
 struct Segtree {
 private:

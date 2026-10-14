@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 // [L, R] を桁数 d ごとの半開区間 [l, r) に分割し、 f(d, l, r) を呼び出す。
 // [L, R] は符号なし整数を要求する。
 template<class T, class F> void enumerate_digits(T L, T R, F f) {

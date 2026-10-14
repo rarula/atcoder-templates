@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 const ll MAX = 1e7; // クエリで飛んでくる可能性のある最大の n,k 以上の値
 const ll MOD = 998244353; // 法 M の値 (M は素数かつ、常に n < M を満たさなければならない)
 ll fac[MAX], fac_inv[MAX], inv[MAX];

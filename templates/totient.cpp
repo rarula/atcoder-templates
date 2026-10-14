@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 ll totient(ll n) {
     ll res = n;
     for (ll p = 2; p * p <= n; p++) {

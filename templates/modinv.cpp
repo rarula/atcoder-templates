@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 ll modinv(ll a, ll mod) {
     ll b = mod;
     ll u = 1;
@@ -18,6 +19,7 @@ ll modinv(ll a, ll mod) {
 
 /*
 
+// from https://github.com/rarula/atcoder-templates
 ll modinv(ll a, ll mod) {
     return modpow(a, mod-2, mod);
 }

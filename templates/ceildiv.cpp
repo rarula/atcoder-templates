@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 ll ceildiv(ll a, ll b) {
     assert(b != 0);
     ll q = a / b;

@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 namespace dbg {
     template<class T> struct type { static constexpr int id = 0; };
 

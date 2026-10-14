@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 // 区間をsetで管理するためのデータ構造（右半開区間）
 struct IntervalSet {
 private:

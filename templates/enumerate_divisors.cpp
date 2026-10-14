@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 vector<ll> enumerate_divisors(ll n) {
     vector<ll> res;
     for (ll i = 1; i*i <= n; i++) {

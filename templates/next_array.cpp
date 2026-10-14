@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 // next[i][c] := 文字列 s の i 文字目を含めたそれ以降で、文字 c が出現する最小の添え字 (存在しないときは -1)
 vector<vector<ll>> make_next(const string &s) {
     ll n = s.size();

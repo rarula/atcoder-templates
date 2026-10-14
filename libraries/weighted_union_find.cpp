@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 /// @brief Weighted Union-Find (union by size + path compression)
 /// @tparam T `+`, `-`, `+=`, `-=` が定義された加法群
 template<class T> struct WeightedUnionFind {

@@ -4,6 +4,7 @@ using ll = long long;
 
 #include "eratosthenes_sieve.cpp"
 
+// from https://github.com/rarula/atcoder-templates
 vector<ll> smallest_prime_factors(ll n) {
     vector<ll> spf(n+1, 0);
     auto is_prime = eratosthenes(n);

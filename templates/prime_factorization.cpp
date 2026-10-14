@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 struct Ret {
     ll p; // p^e = x
     ll e;

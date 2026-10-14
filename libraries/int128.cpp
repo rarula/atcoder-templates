@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// from https://github.com/rarula/atcoder-templates
 struct Int128 {
     using i128 = __int128_t;
     i128 v;
