@@ -52,6 +52,7 @@ public:
     }
 
     // 区間 [l, r) を挿入する
+    // 全体での操作回数を Q 回としたとき、償却 O(log Q)
     void insert(T l, T r) {
         assert(l <= r);
         if (l == r) return;
@@ -86,6 +87,7 @@ public:
     }
 
     // 区間 [l, r) を削除する
+    // 全体での操作回数を Q 回としたとき、償却 O(log Q)
     void erase(T l, T r) {
         assert(l <= r);
         if (l == r) return;
@@ -126,6 +128,7 @@ public:
 
     // 区間 [l, r) を完全に含む区間が存在するとき true、存在しないとき false を返す
     // l == r のとき (つまり空区間のとき) 、常に true を返す
+    // O(log N)
     bool contains(const T &l, const T &r) const {
         assert(l <= r);
         if (l == r) return true;
@@ -140,6 +143,7 @@ public:
     }
 
     // p 以上であって、いずれの区間にも含まれない最小の整数を返す
+    // O(log N)
     T mex(const T &p) const {
         auto it = s.upper_bound(Interval(p, numeric_limits<T>::max()));
         if (it != s.begin()) {
@@ -152,11 +156,13 @@ public:
     }
 
     // 区間の集合の先頭要素を指すイテレータを返す
+    // O(1)
     set<Interval>::iterator begin() const {
         return s.begin();
     }
 
     // 区間の集合の終端要素を指すイテレータを返す
+    // O(1)
     set<Interval>::iterator end() const {
         return s.end();
     }
