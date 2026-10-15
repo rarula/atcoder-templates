@@ -91,8 +91,7 @@ struct Int128 {
     // 標準入出力
     friend istream& operator>>(istream& is, Int128 &val) {
         string str;
-        cin >> str;
-        val.parse(str);
+        if (is >> str) val.parse(str);
         return is;
     }
     friend ostream& operator<<(ostream& os, Int128 val) {
