@@ -53,6 +53,8 @@ public:
 
     // 区間 [l, r) を挿入する
     void insert(T l, T r) {
+        assert(l <= r);
+        if (l == r) return;
         auto it = s.lower_bound(Interval(l, 0));
         while (it != s.end()) {
             T sl = it->l;
@@ -85,6 +87,8 @@ public:
 
     // 区間 [l, r) を削除する
     void erase(T l, T r) {
+        assert(l <= r);
+        if (l == r) return;
         auto it = s.lower_bound(Interval(l, 0));
         while (it != s.end()) {
             T sl = it->l;
@@ -121,7 +125,10 @@ public:
     }
 
     // 区間 [l, r) を完全に含む区間が存在するとき true、存在しないとき false を返す
+    // l == r のとき (つまり空区間のとき) 、常に true を返す
     bool contains(const T &l, const T &r) const {
+        assert(l <= r);
+        if (l == r) return true;
         auto it = s.upper_bound(Interval(l, numeric_limits<T>::max()));
         if (it != s.begin()) {
             it--;
