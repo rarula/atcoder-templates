@@ -19,6 +19,7 @@ bool cmp(const Point& a, const Point& b) {
     return cross(a, b) > 0;
 }
 
+// 原点の偏角は定義されないため、(0, 0) は入力に含まれないようにする
 void polar_angle_sort(vector<Point> &points) {
     sort(points.begin(), points.end(), cmp);
 }
