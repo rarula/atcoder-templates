@@ -33,7 +33,10 @@ namespace dbg {
 
         if constexpr (is_array_v<U> && is_same_v<remove_cv_t<remove_extent_t<U>>, char>) {
             constexpr size_t N = extent_v<U>;
-            cerr.write(x, N - (x[N - 1] == '\n'));
+            size_t len = 0;
+            while (len < N && x[len] != '\0') len++;
+            if (len > 0 && x[len-1] == '\n') len--;
+            cerr.write(x, static_cast<streamsize>(len));
         }
         else if constexpr (type<U>::id == 0) {
             if constexpr (is_same_v<U, bool>)
