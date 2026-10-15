@@ -3,7 +3,8 @@ using namespace std;
 using ll = long long;
 
 // from https://github.com/rarula/atcoder-templates
-template<class T> struct BIT {
+template<class T>
+struct BIT {
 private:
     int n;
     vector<T> data;
@@ -19,8 +20,12 @@ private:
     }
 
 public:
+    // 長さ n の配列を作る。初期値はすべて 0 。
+    // O(n)
     BIT(int n) : n(n), data(n + 1) {}
 
+    // p 番目の値に val を加算する
+    // O(log n)
     void add(int p, T val) {
         assert(0 <= p && p < n);
         p++;
@@ -30,6 +35,8 @@ public:
         }
     }
 
+    // 区間 [l, r) の総和を返す
+    // O(log n)
     T sum(int l, int r) {
         assert(0 <= l && l <= r && r <= n);
         return sum(r) - sum(l);

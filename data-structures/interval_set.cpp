@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 
 // from https://github.com/rarula/atcoder-templates
-// 区間をsetで管理するためのデータ構造（右半開区間）
+// 区間 [l, r) を集合で管理するためのデータ構造
 struct IntervalSet {
 private:
     using T = ll;
@@ -24,16 +24,6 @@ private:
     };
     set<Interval> s;
 
-    /// 処理中に区間 [l, r) を挿入したときに呼び出される。
-    void on_insert(T l, T r) {
-        // Todo
-    }
-
-    /// 処理中に区間 [l, r) を削除したときに呼び出される。
-    void on_erase(T l, T r) {
-        // Todo
-    }
-
     void insert_wrapper(T l, T r) {
         on_insert(l, r);
         s.insert(Interval(l, r));
@@ -49,8 +39,19 @@ private:
         return s.erase(it);
     }
 
+    // 処理中に区間 [l, r) を挿入したときに呼び出される
+    void on_insert(T l, T r) {}
+
+    // 処理中に区間 [l, r) を削除したときに呼び出される
+    void on_erase(T l, T r) {}
+
 public:
-    /// 区間 [l, r) を挿入します。
+    friend ostream& operator<<(ostream &os, const IntervalSet &e) {
+        for (const auto& interval : e.s) os << interval << "  ";
+        return os;
+    }
+
+    // 区間 [l, r) を挿入する
     void insert(T l, T r) {
         auto it = s.lower_bound(Interval(l, 0));
         while (it != s.end()) {
@@ -82,7 +83,7 @@ public:
         insert_wrapper(l, r);
     }
 
-    /// 区間 [l, r) を削除します。
+    // 区間 [l, r) を削除する
     void erase(T l, T r) {
         auto it = s.lower_bound(Interval(l, 0));
         while (it != s.end()) {
@@ -119,7 +120,7 @@ public:
         }
     }
 
-    /// 区間 [l, r) を完全に含む区間が存在するか探索します。
+    // 区間 [l, r) を完全に含む区間が存在するとき true、存在しないとき false を返す
     bool contains(const T &l, const T &r) const {
         auto it = s.upper_bound(Interval(l, numeric_limits<T>::max()));
         if (it != s.begin()) {
@@ -131,7 +132,7 @@ public:
         return false;
     }
 
-    /// p 以上であって、いずれの区間にも含まれない最小の整数を返します。
+    // p 以上であって、いずれの区間にも含まれない最小の整数を返す
     T mex(const T &p) const {
         auto it = s.upper_bound(Interval(p, numeric_limits<T>::max()));
         if (it != s.begin()) {
@@ -143,18 +144,13 @@ public:
         return p;
     }
 
-    /// 区間の集合の先頭要素を指すイテレータを返します。
+    // 区間の集合の先頭要素を指すイテレータを返す
     set<Interval>::iterator begin() const {
         return s.begin();
     }
 
-    /// 区間の集合の終端（≠末尾）要素を指すイテレータを返します。
+    // 区間の集合の終端要素を指すイテレータを返す
     set<Interval>::iterator end() const {
         return s.end();
-    }
-
-    friend ostream& operator<<(ostream &os, const IntervalSet &e) {
-        for (const auto& interval : e.s) os << interval << "  ";
-        return os;
     }
 };

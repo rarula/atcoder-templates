@@ -3,18 +3,15 @@ using namespace std;
 using ll = long long;
 
 // from https://github.com/rarula/atcoder-templates
-template<ll M> struct modint {
+template<ll M>
+struct modint {
     ll v = 0;
-    ll val() const {
-        return v;
-    }
+    ll val() const { return v; }
+
     modint(ll v = 0) : v((v % M + M) % M) {}
-    modint operator+() const {
-        return *this;
-    }
-    modint operator-() const {
-        return modint() - *this;
-    }
+    modint operator+() const { return *this; }
+    modint operator-() const { return modint() - *this; }
+
     modint& operator+=(const modint &r) {
         if ((v += r.v) >= M) v -= M;
         return *this;
@@ -31,24 +28,7 @@ template<ll M> struct modint {
     modint& operator/=(const modint &r) {
         return *this *= r.inv();
     }
-    modint& operator++() {
-        (*this) += 1;
-        return *this;
-    }
-    modint& operator--() {
-        (*this) -= 1;
-        return *this;
-    }
-    modint operator++(int) {
-        modint res = *this;
-        ++(*this);
-        return res;
-    }
-    modint operator--(int) {
-        modint res = *this;
-        --(*this);
-        return res;
-    }
+
     modint pow(ll n) const {
         modint x = *this;
         modint res = 1;
@@ -62,23 +42,17 @@ template<ll M> struct modint {
     modint inv() const {
         return pow(M-2);
     }
-    friend modint operator+(const modint &l, const modint &r) {
-        return modint(l) += r;
-    }
-    friend modint operator-(const modint &l, const modint &r) {
-        return modint(l) -= r;
-    }
-    friend modint operator*(const modint &l, const modint &r) {
-        return modint(l) *= r;
-    }
-    friend modint operator/(const modint &l, const modint &r) {
-        return modint(l) /= r;
-    }
-    friend bool operator==(const modint &l, const modint &r) {
-        return l.v == r.v;
-    }
-    friend bool operator!=(const modint &l, const modint &r) {
-        return l.v != r.v;
-    }
+
+    modint& operator++() { (*this) += 1; return *this; }
+    modint& operator--() { (*this) -= 1; return *this; }
+    modint operator++(int) { modint res = *this; ++(*this); return res; }
+    modint operator--(int) { modint res = *this; --(*this); return res; }
+
+    friend modint operator+(const modint &l, const modint &r) { return modint(l) += r; }
+    friend modint operator-(const modint &l, const modint &r) { return modint(l) -= r; }
+    friend modint operator*(const modint &l, const modint &r) { return modint(l) *= r; }
+    friend modint operator/(const modint &l, const modint &r) { return modint(l) /= r; }
+    friend bool operator==(const modint &l, const modint &r) { return l.v == r.v; }
+    friend bool operator!=(const modint &l, const modint &r) { return l.v != r.v; }
 };
 using mint = modint<998244353>;

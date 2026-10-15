@@ -51,9 +51,9 @@ struct Int128 {
     // 複合代入ビット演算子
     Int128& operator<<=(const Int128 &r) { v <<= r.v; return *this; }
     Int128& operator>>=(const Int128 &r) { v >>= r.v; return *this; }
-    Int128& operator&=(const Int128 &r) { v &= r.v; return *this; }
-    Int128& operator^=(const Int128 &r) { v ^= r.v; return *this; }
-    Int128& operator|=(const Int128 &r) { v |= r.v; return *this; }
+    Int128& operator&= (const Int128 &r) { v &= r.v; return *this; }
+    Int128& operator^= (const Int128 &r) { v ^= r.v; return *this; }
+    Int128& operator|= (const Int128 &r) { v |= r.v; return *this; }
 
     // 単項演算子 (前置形式)
     Int128 operator~() const { Int128 res = *this; res.v = ~res.v; return res; }
@@ -76,17 +76,17 @@ struct Int128 {
     // ビット演算子
     friend Int128 operator<<(const Int128 &l, const Int128 &r) { return Int128(l) <<= r; }
     friend Int128 operator>>(const Int128 &l, const Int128 &r) { return Int128(l) >>= r; }
-    friend Int128 operator&(const Int128 &l, const Int128 &r) { return Int128(l) &= r; }
-    friend Int128 operator^(const Int128 &l, const Int128 &r) { return Int128(l) ^= r; }
-    friend Int128 operator|(const Int128 &l, const Int128 &r) { return Int128(l) |= r; }
+    friend Int128 operator& (const Int128 &l, const Int128 &r) { return Int128(l) &= r; }
+    friend Int128 operator^ (const Int128 &l, const Int128 &r) { return Int128(l) ^= r; }
+    friend Int128 operator| (const Int128 &l, const Int128 &r) { return Int128(l) |= r; }
 
     // 比較演算子
     friend bool operator==(const Int128 &l, const Int128 &r) { return l.v == r.v; }
     friend bool operator!=(const Int128 &l, const Int128 &r) { return l.v != r.v; }
-    friend bool operator<(const Int128 &l, const Int128 &r) { return l.v < r.v; }
-    friend bool operator>(const Int128 &l, const Int128 &r) { return l.v > r.v; }
     friend bool operator<=(const Int128 &l, const Int128 &r) { return l.v <= r.v; }
     friend bool operator>=(const Int128 &l, const Int128 &r) { return l.v >= r.v; }
+    friend bool operator< (const Int128 &l, const Int128 &r) { return l.v < r.v; }
+    friend bool operator> (const Int128 &l, const Int128 &r) { return l.v > r.v; }
 
     // 標準入出力
     friend istream& operator>>(istream& is, Int128 &val) {

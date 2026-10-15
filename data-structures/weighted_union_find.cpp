@@ -3,23 +3,21 @@ using namespace std;
 using ll = long long;
 
 // from https://github.com/rarula/atcoder-templates
-/// @brief Weighted Union-Find (union by size + path compression)
-/// @tparam T `+`, `-`, `+=`, `-=` が定義された加法群
-template<class T> struct WeightedUnionFind {
+// T には `+`, `-`, `+=`, `-=` が定義された加法群を要求する
+template<class T>
+struct WeightedUnionFind {
     vector<int> parents;
     vector<int> sizes;
     vector<T> weight_diff;
 
-    /// @brief n 頂点 0 辺の無向グラフを作ります。計算量は O(n) 。
-    /// @param n 頂点数 (0 ≤ n)
-    /// @param e 重みとなる加法群に対する単位元
+    // n 頂点 0 辺の無向グラフを作る。 e は T の単位元。
+    // O(n)
     WeightedUnionFind(int n, T e) : parents(n), sizes(n, 1), weight_diff(n, e) {
         for (int i = 0; i < n; i++) parents[i] = i;
     }
 
-    /// @brief 頂点 a の属する連結成分の代表元を返します。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @return 頂点 a の属する連結成分の代表元
+    // 頂点 a の属する連結成分の代表元の頂点番号を返す
+    // O(α(n))
     int leader(int a) {
         if (parents[a] == a) return a;
         int l = leader(parents[a]);
@@ -27,20 +25,14 @@ template<class T> struct WeightedUnionFind {
         return parents[a] = l;
     }
 
-    /// @brief 頂点 a, b が連結かどうかを返します。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @param b 対象の頂点 (0 ≤ b < n)
-    /// @return 頂点 a, b が連結ならば `true` 、そうでないなら `false`
+    // 頂点 a, b が連結なら true、連結でないなら false を返す
+    // O(α(n))
     bool same(int a, int b) {
         return leader(a) == leader(b);
     }
 
-    /// @brief
-    /// 頂点 a, b を weight(b) - weight(a) = w となるように連結します。@n
-    /// 頂点 a, b が既に連結のとき何もしません。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @param b 対象の頂点 (0 ≤ b < n)
-    /// @param w weight(b) - weight(a) = w となる重み w
+    // 頂点 a, b を weight(b) - weight(a) = w となるように連結する。頂点 a, b が既に連結のとき何もしない。
+    // O(α(n))
     void merge(int a, int b, T w) {
         w = -w;
         w -= weight(a);
@@ -57,27 +49,21 @@ template<class T> struct WeightedUnionFind {
         weight_diff[al] = w;
     }
 
-    /// @brief 頂点 a の属する連結成分のサイズを返します。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @return 頂点 a の属する連結成分のサイズ
+    // 頂点 a の属する連結成分のサイズを返す
+    // O(α(n))
     int size(int a) {
         return sizes[leader(a)];
     }
 
-    /// @brief 頂点 a の重みを返します。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @return 頂点 a の重み
+    // 頂点 a の重みを返す
+    // O(α(n))
     T weight(int a) {
         leader(a);
         return weight_diff[a];
     }
 
-    /// @brief
-    /// 頂点 a, b が連結のとき weight(b) - weight(a) を返します。@n
-    /// 頂点 a, b が連結でないときの動作は未定義です。計算量は ならし O(α(n)) 。
-    /// @param a 対象の頂点 (0 ≤ a < n)
-    /// @param b 対象の頂点 (0 ≤ b < n)
-    /// @return weight(b) - weight(a)
+    // 頂点 a, b が連結のとき weight(b) - weight(a) を返す。頂点 a, b が連結でないときの動作は未定義。
+    // O(α(n))
     T diff(int a, int b) {
         return weight(b) - weight(a);
     }

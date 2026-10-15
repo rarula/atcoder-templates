@@ -28,6 +28,8 @@ private:
     }
 
 public:
+    // 長さ n の配列を作る。初期値はすべて e() 。
+    // O(n)
     LazySegtree(int n) : n(n) {
         size = 1;
         log = 0;
@@ -39,11 +41,15 @@ public:
         lazy.resize(1 * size, id());
     }
 
+    // 長さ seq.size() の配列を作る。初期値は seq に基づいた値になる。
+    // O(n)
     LazySegtree(const vector<S>& seq) : LazySegtree(seq.size()) {
         for (int i = 0; i < n; i++) data[size+i] = seq[i];
         for (int i = size-1; i >= 1; i--) update_node(i);
     }
 
+    // p 番目の値を val に更新する
+    // O(log n)
     void set(int p, S val) {
         assert(0 <= p && p < n);
         p += size;
@@ -52,6 +58,8 @@ public:
         for (int i = 1; i <= log; i++) update_node(p >> i);
     }
 
+    // p 番目の値を返す
+    // O(log n)
     S get(int p) {
         assert(0 <= p && p < n);
         p += size;
@@ -59,6 +67,8 @@ public:
         return data[p];
     }
 
+    // 区間 [l, r) の値のモノイド積を返す
+    // O(log n)
     S prod(int l, int r) {
         assert(0 <= l && l <= r && r <= n);
         if (l == r) return e();
@@ -79,10 +89,14 @@ public:
         return op(sml, smr);
     }
 
+    // 区間 [0, n) の値のモノイド積を返す
+    // O(1)
     S all_prod() const {
         return data[1];
     }
 
+    // p 番目の値を作用 f で更新する
+    // O(log n)
     void apply(int p, F f) {
         assert(0 <= p && p < n);
         p += size;
@@ -91,6 +105,8 @@ public:
         for (int i = 1; i <= log; i++) update_node(p >> i);
     }
 
+    // 区間 [l, r) の値を作用 f で更新する
+    // O(log n)
     void apply(int l, int r, F f) {
         assert(0 <= l && l <= r && r <= n);
         l += size;

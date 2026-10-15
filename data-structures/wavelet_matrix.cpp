@@ -13,7 +13,7 @@ private:
     int N; // length of integer sequence
     vector<vector<int>> data; // prefix sum of direction
 
-    // return subtree ranges: [l0, r0), [l1, r1)
+    // 高さ h の区間 [l, r) において、その部分木の区間 [l0, r0), [l1, r1) を返す
     tuple<int,int,int,int> get_subtree_ranges(int h, int l, int r) {
         int l0 = l - data[h][l];
         int r0 = r - data[h][r];
@@ -47,6 +47,8 @@ private:
     }
 
 public:
+    // ビット幅を H として、ウェーブレット行列を配列 seq から構築する
+    // O(|seq| * H)
     WaveletMatrix(int H, vector<T> seq) : H(H), N(seq.size()), data(H) {
         assert(0 <= H && H < numeric_limits<T>::digits);
         for (int i = 0; i < N; i++) assert(0 <= seq[i] && seq[i] < (T(1) << H));
@@ -72,21 +74,24 @@ public:
         }
     }
 
-    // k-th (0-indexed) smallest number in seq[l, r)
+    // 区間 [l, r) の中で k 番目 (0-indexed) に小さい値を返す
+    // O(H)
     T kth_smallest(int l, int r, int k) {
         assert(0 <= l && l < r && r <= N);
         assert(0 <= k && k < r - l);
         return kth_smallest_rec(H-1, l, r, k);
     }
 
-    // k-th (0-indexed) largest number in seq[l, r)
+    // 区間 [l, r) の中で k 番目 (0-indexed) に大きい値を返す
+    // O(H)
     T kth_largest(int l, int r, int k) {
         assert(0 <= l && l < r && r <= N);
         assert(0 <= k && k < r - l);
         return kth_smallest(l, r, r - l - k - 1);
     }
 
-    // count the number of elements x (x < upper) in seq[l, r)
+    // 区間 [l, r) の中で upper 未満の値の個数を返す
+    // O(H)
     int freq(int l, int r, T upper) {
         assert(0 <= l && l <= r && r <= N);
         assert(0 <= upper && upper <= (T(1) << H));
@@ -94,7 +99,8 @@ public:
         return freq_less_rec(H-1, l, r, upper);
     }
 
-    // count the number of elements x (lower <= x < upper) in seq[l, r)
+    // 区間 [l, r) の中で lower 以上 upper 未満の値の個数を返す
+    // O(H)
     int freq(int l, int r, T lower, T upper) {
         assert(0 <= l && l <= r && r <= N);
         assert(0 <= lower && lower <= upper && upper <= (T(1) << H));

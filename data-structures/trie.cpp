@@ -13,7 +13,7 @@ private:
     vector<Node> nodes;
 
     // str を辿った先の頂点番号を返す
-    // 存在しなければ -1 を返す
+    // そのような頂点が存在しなければ -1 を返す
     // O(|str|)
     int find_node(const string& str) const {
         int v = 0;
