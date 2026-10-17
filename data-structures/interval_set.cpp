@@ -155,6 +155,12 @@ public:
         return p;
     }
 
+    // 集合に含まれている全区間を左端の昇順で vector にして返す
+    // O(N)
+    vector<Interval> intervals() const {
+        return vector<Interval>(s.begin(), s.end());
+    }
+
     // 区間の集合の先頭要素を指すイテレータを返す
     // O(1)
     set<Interval>::iterator begin() const {
