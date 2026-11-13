@@ -144,7 +144,7 @@ public:
 
     // p 以上であって、いずれの区間にも含まれない最小の整数を返す
     // O(log N)
-    T mex(const T &p) const {
+    T mex_right(const T &p) const {
         auto it = s.upper_bound(Interval(p, numeric_limits<T>::max()));
         if (it != s.begin()) {
             it--;
@@ -153,6 +153,19 @@ public:
             if (sl <= p && p < sr) return sr;
         }
         return p;
+    }
+
+    // p 未満であって、いずれの区間にも含まれない最大の整数を返す
+    // O(log N)
+    T mex_left(const T &p) const {
+        auto it = s.lower_bound(Interval(p, numeric_limits<T>::min()));
+        if (it != s.begin()) {
+            it--;
+            T sl = it->l;
+            T sr = it->r;
+            if (sl < p && p <= sr) return sl - 1;
+        }
+        return p - 1;
     }
 
     // 集合に含まれている全区間を左端の昇順で vector にして返す
