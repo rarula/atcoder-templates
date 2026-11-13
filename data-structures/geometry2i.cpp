@@ -126,5 +126,24 @@ namespace geometry2i {
         return a.ccw(b.s) * a.ccw(b.t) <= 0 && b.ccw(a.s) * b.ccw(a.t) <= 0;
     }
 
+    F distance(const vec& a, const vec& b) {
+        return (b - a).norm();
+    }
+    F distance(const line& l, const vec& p) {
+        return abs(cross(l.dir(), p - l.s) / l.dir().norm());
+    }
+    F distance(const line& a, const line& b) {
+        if (intersect(a, b)) return 0;
+        return distance(a, b.s);
+    }
+    F distance(const segment& s, const vec& p) {
+        if (dot(s.t - s.s, p - s.s) < 0) return distance(s.s, p);
+        if (dot(s.s - s.t, p - s.t) < 0) return distance(s.t, p);
+        return distance(static_cast<line>(s), p);
+    }
+    F distance(const segment& a, const segment& b) {
+        if (intersect(a, b)) return 0;
+        return min({ distance(a, b.s), distance(a, b.t), distance(b, a.s), distance(b, a.t) });
+    }
 }
 using namespace geometry2i;
