@@ -145,5 +145,29 @@ namespace geometry2i {
         if (intersect(a, b)) return 0;
         return min({ distance(a, b.s), distance(a, b.t), distance(b, a.s), distance(b, a.t) });
     }
+
+    using polygon = vector<vec>;
+
+    bool is_convex(const polygon& g) {
+        int size = g.size();
+        for (int i = 0; i < size; i++) {
+            if (line(g[i], g[(i + 1) % size]).ccw(g[(i + 2) % size]) == -1) return false;
+        }
+        return true;
+    }
+
+    enum { OUTSIDE, INSIDE, ON };
+    int contains(const polygon& g, const vec& p) {
+        bool inside = false;
+        int size = g.size();
+        for (int i = 0; i < size; i++) {
+            vec pa = g[i] - p;
+            vec pb = g[(i + 1) % size] - p;
+            if (pa.y > pb.y) swap(pa, pb);
+            if (pa.y <= 0 && 0 < pb.y && cross(pa, pb) < 0) inside = !inside;
+            if (cross(pa, pb) == 0 && dot(pa, pb) <= 0) return ON;
+        }
+        return inside ? INSIDE : OUTSIDE;
+    }
 }
 using namespace geometry2i;

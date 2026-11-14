@@ -171,5 +171,28 @@ namespace geometry2f {
         if (intersect(a, b)) return 0;
         return min({ distance(a, b.s), distance(a, b.t), distance(b, a.s), distance(b, a.t) });
     }
+
+    using polygon = vector<vec>;
+
+    bool is_convex(const polygon& g) {
+        int size = g.size();
+        for (int i = 0; i < size; i++) {
+            if (line(g[i], g[(i + 1) % size]).ccw(g[(i + 2) % size]) == -1) return false;
+        }
+        return true;
+    }
+
+    T signed_area(const polygon& g) {
+        T s = 0;
+        int size = g.size();
+        for (int i = 0; i < size; i++) {
+            s += cross(g[i], g[(i + 1) % size]);
+        }
+        return s / 2.0;
+    }
+
+    T area(const polygon& g) {
+        return abs(signed_area(g));
+    }
 }
 using namespace geometry2f;
