@@ -194,5 +194,39 @@ namespace geometry2f {
     T area(const polygon& g) {
         return abs(signed_area(g));
     }
+
+    struct circle {
+        vec p;
+        T r;
+        circle(vec p = vec(), T r = 0) : p(p), r(r) {}
+        friend istream& operator>>(istream& is, circle& c) {
+            is >> c.p >> c.r;
+            return is;
+        }
+    };
+
+    // 4 : 2円が離れている
+    // 3 : 2円が外接する
+    // 2 : 2円が2点で交わる
+    // 1 : 2円が内接する
+    // 0 : 2円のうち一方が他方の内部にある
+    int intersect(const circle& a, const circle& b) {
+        T d = distance(a.p, b.p);
+        if (d > a.r + b.r + eps) return 4;
+        if (equal(d, a.r + b.r)) return 3;
+        if (equal(d, abs(a.r - b.r))) return 1;
+        if (d < abs(a.r - b.r) - eps) return 0;
+        return 2;
+    }
+
+    circle incircle(const vec& a, const vec& b, const vec& c) {
+        T ab = (a - b).norm();
+        T bc = (b - c).norm();
+        T ca = (c - a).norm();
+        T x = (bc * a.x + ca * b.x + ab * c.x) / (ab + bc + ca);
+        T y = (bc * a.y + ca * b.y + ab * c.y) / (ab + bc + ca);
+        T r = distance(line(a, b), vec(x, y));
+        return circle(vec(x, y), r);
+    }
 }
 using namespace geometry2f;
