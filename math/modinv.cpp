@@ -16,12 +16,3 @@ ll modinv(ll a, ll mod) {
     if (u < 0) u += mod;
     return u;
 }
-
-/*
-
-// from https://github.com/rarula/atcoder-templates
-ll modinv(ll a, ll mod) {
-    return modpow(a, mod-2, mod);
-}
-
-*/
